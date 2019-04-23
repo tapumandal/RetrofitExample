@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.retrofitexample.R;
 import com.example.retrofitexample.model.User;
+import com.example.retrofitexample.model.UsersData;
 import com.example.retrofitexample.network.ApiClient;
 import com.example.retrofitexample.network.ApiService;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
 
     private ArrayList<String> userList = new ArrayList<String>();
+    private ArrayList<String> userEmail = new ArrayList<String>();
+    private ArrayList<String> userImg = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
                 for(int i=0; i<response.body().size(); i++){
                     userList.add(response.body().get(i).getName());
+                    userEmail.add(response.body().get(i).getEmail());
+                    userImg.add(response.body().get(i).getPicture());
                 }
 
 
@@ -79,6 +84,23 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 
         intent.putExtra("userList", this.userList);
+        intent.putExtra("userEmail", this.userEmail);
+        intent.putExtra("userImg", this.userImg);
+        startActivity(intent);
+    }
+
+    public void goRecyclerList(View view) {
+        Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
+
+//        intent.putExtra("userList", this.userList);
+//        intent.putExtra("userEmail", this.userEmail);
+//        intent.putExtra("userImg", this.userImg);
+
+        UsersData usersData = new UsersData();
+        usersData.setAllName(this.userList);
+        usersData.setAllEmail(this.userEmail);
+        usersData.setAllImageUrl(this.userImg);
+
         startActivity(intent);
     }
 }

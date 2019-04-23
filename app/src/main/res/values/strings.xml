@@ -2,4 +2,6 @@
     <string name="app_name">Retrofit Example</string>
     <string name="go_second_activity">GO Second Activity</string>
     <string name="second_activity">Second Activity</string>
+    <string name="recycler_list_name">Test Name</string>
+    <string name="recycler_list_email">Email</string>
 </resources>

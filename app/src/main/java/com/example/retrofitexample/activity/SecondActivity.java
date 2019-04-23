@@ -1,7 +1,6 @@
 package com.example.retrofitexample.activity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,12 +10,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.retrofitexample.R;
+import com.example.retrofitexample.adapter.UserListAdapter;
 
 import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
 
     private ArrayList<String> userList = new ArrayList<String>();
+    private ArrayList<String> userEmail = new ArrayList<String>();
+    private ArrayList<String> userImg = new ArrayList<String>();
 
     private ListView userListView;
 
@@ -32,8 +34,14 @@ public class SecondActivity extends AppCompatActivity {
 
     protected void showUserList(){
         userList = (ArrayList<String>) getIntent().getSerializableExtra("userList");
+        userEmail = (ArrayList<String>) getIntent().getSerializableExtra("userEmail");
+        userImg = (ArrayList<String>) getIntent().getSerializableExtra("userImg");
 
-        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.user_list, userList);
+//        using Array Adapter
+//        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.users, userList);
+
+//        CustomAdapter
+        final UserListAdapter listAdapter = new UserListAdapter(this, userList, userEmail, userImg);
 
         userListView.setAdapter(listAdapter);
 
